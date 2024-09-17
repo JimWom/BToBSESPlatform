@@ -5,57 +5,168 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Listings</title>
     <style>
-        body {
+        /* 确保页面和内容占满整个屏幕宽度 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding-bottom: 50px; /* 留出空间给固定的footer */
-            background-color: #f5f5f5;
         }
-        .container {
-            width: 90%;
-            margin: 20px auto;
+
+        /* Header 的样式 */
+        header nav {
+            background-color: #00796b;
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .job-listing {
-            background-color: white;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-        .job-listing h3 {
-            margin: 0;
+
+        header nav a {
+            color: white;
+            text-decoration: none;
             font-size: 18px;
+            margin-right: 15px;
         }
-        .job-listing .location {
-            color: #777;
-            margin: 5px 0;
+
+        header nav a:hover {
+            text-decoration: underline;
         }
-        .job-listing .salary {
-            color: #00796b;
-            font-weight: bold;
+
+        /* Container 确保内容均匀分布 */
+        .container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            width: 100%;
+            padding: 20px;
+            margin-left: 400px;
+            box-sizing: border-box;
         }
-        .tags {
-            margin-top: 10px;
-            font-size: 12px;
-            color: #555;
+
+        /* 职位列表部分占据页面宽度的 40% */
+        .job-list {
+            flex: 1;
+            max-width: 40%;
+            margin-right: 20px;
         }
+
+        .job-listing {
+            background-color: #f5f5f5;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .job-listing:hover {
+            background-color: #e0f7fa;
+        }
+
+        /* 详细信息部分占据页面剩下的 60% */
+        .job-detail {
+            flex: 2;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 确保 Footer 在页面底部 */
+        footer {
+            background-color: #00796b;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+        }
+
     </style>
 </head>
 <body>
-<!-- 插入header -->
-<th:block th:insert="header :: header"></th:block>
+<!--<th:block th:insert="header :: header"></th:block>-->
+<!-- header.html -->
+<header>
+    <nav>
+        <div>
+            <a href="/">Job Listings</a>
+        </div>
+        <div>
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </nav>
+</header>
 
+<!-- jobs.html -->
 <div class="container">
-    <!-- 使用 Thymeleaf 循环来动态渲染职位列表 -->
-    <div th:each="job : ${jobs}" class="job-listing">
-        <h3 th:text="${job.title}">Job Title</h3>
-        <div class="location" th:text="'勤務地: ' + ${job.location}">勤務地</div>
-        <div class="salary" th:text="${job.salary}">Salary</div>
-        <div class="tags" th:text="'タグ: ' + ${job.tags}">Tags</div>
+    <div class="job-list">
+        <div class="job-listing" th:each="job : ${jobs}" th:attr="data-job-id=${job.id}" onclick="showJobDetail(this.getAttribute('data-job-id'))">
+            <h3 th:text="${job.title}">Job Title</h3>
+            <div class="location" th:text="'勤務地: ' + ${job.location}">勤務地</div>
+            <div class="salary" th:text="'給与: ' + ${job.salary}">給与</div>
+            <div class="tags" th:text="'タグ: ' + ${job.tags}">タグ</div>
+        </div>
+    </div>
+    <div class="job-detail" id="job-detail">
+        <h2>詳細情報をクリックしてください</h2>
     </div>
 </div>
 
-<!-- 插入footer -->
-<th:block th:insert="footer :: footer"></th:block>
+<!-- footer.html -->
+<footer>
+    <p>&copy; 2024 Job Listings. All rights reserved.</p>
+</footer>
+
+<!--&lt;!&ndash; 插入footer &ndash;&gt;-->
+<!--<th:block th:insert="footer :: footer"></th:block>-->
+<!-- 插入JavaScript来显示详细信息 -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // 模拟从后端传来的职位数据
+        const jobs = [
+            {
+                id: 1,
+                title: "【Java(Spring Boot)】大手飲食予約サービスのリプレイ",
+                location: "東京",
+                salary: "60-70万円/月",
+                tags: "Java, Spring, SpringBoot, JUnit",
+                description: "この案件は大手飲食予約サービスのリプレイ開発です。..."
+            },
+            {
+                id: 2,
+                title: "【Java(Spring Boot)】小売業配送プラットフォーム開発",
+                location: "鎌田",
+                salary: "55-65万円/月",
+                tags: "Java, Spring, SpringBoot, JUnit",
+                description: "この案件は小売業の配送プラットフォームを構築するためのプロジェクトです。..."
+            }
+        ];
+
+        // 点击事件处理函数，根据点击的job ID显示对应的职位详情
+        window.showJobDetail = function (jobId) {
+            console.log("Job clicked: " + jobId);  // 调试输出
+            const job = jobs.find(j => j.id == jobId);
+            if (job) {
+                const jobDetailDiv = document.getElementById("job-detail");
+                jobDetailDiv.innerHTML = `
+                        <h2>${job.title}</h2>
+                        <div class="location">勤務地: ${job.location}</div>
+                        <div class="salary">${job.salary}</div>
+                        <div class="tags">タグ: ${job.tags}</div>
+                        <div class="description">${job.description}</div>
+                    `;
+            } else {
+                console.error("Job not found for ID:", jobId);
+            }
+        };
+    });
+</script>
 </body>
 </html>
