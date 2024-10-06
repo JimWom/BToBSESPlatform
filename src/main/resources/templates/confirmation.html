@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Job Submission Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h2 {
+      color: #00796b;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #00796b;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- Displaying a success message from the controller -->
+  <h2>Job Submission Confirmation</h2>
+  <p th:text="${message}">Your job has been submitted successfully!</p>
+
+  <!-- Optionally provide a link to go back to the form or home page -->
+  <p>
+    <a href="/">Back to Home</a>
+  </p>
+</div>
+</body>
+</html>

@@ -59,7 +59,7 @@
             border-radius: 8px;/* 圆角 */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
             cursor: pointer;
-            border: 1px solid rgba(0, 0, 0, 0.3); /* 淡淡的线框 */
+            border: 1px solid rgba(0, 0, 0, 0.1); /* 淡淡的线框 */
         }
 
         .job-listing:hover {
@@ -73,7 +73,7 @@
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(0, 0, 0, 0.5); /* 淡淡的线框 */
+            border: 1px solid rgba(0, 0, 0, 0.1); /* 淡淡的线框 */
             width: 100%; /* 让它占满容器的剩余宽度 */
         }
 
@@ -88,7 +88,6 @@
             width: 100%;
             left: 0;
         }
-
     </style>
 </head>
 <body>
@@ -107,6 +106,10 @@
 </header>
 
 <!-- jobs.html -->
+<div style="background-color: seagreen">
+    <div style="margin-left: 20px;font-size: 40px;color:whitesmoke;font-weight: bold">募集中案件</div>
+</div>
+
 <div class="container">
     <div class="job-list">
         <div class="job-listing" th:each="job : ${jobs}" th:attr="data-job-id=${job.id}" onclick="showJobDetail(this.getAttribute('data-job-id'))">

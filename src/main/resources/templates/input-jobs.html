@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Job</title>
+    <style>
+        /* 确保页面和内容占满整个屏幕宽度 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        /* Header 的样式 */
+        header nav {
+            background-color: #00796b;
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin-right: 15px;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Container 用于包裹整个表单 */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px 40px; /* 添加左右内边距 */
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            margin-bottom: 20px;
+            color: #00796b;
+        }
+
+        /* Form 元素样式 */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: center; /* 居中对齐 */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-align: left; /* 保持标签的左对齐 */
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: calc(100% - 20px); /* 减小宽度以添加左右间距 */
+            padding: 10px;
+            margin-left: 10px; /* 添加左右边距 */
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        /* 按钮样式 */
+        .form-group button {
+            background-color: #00796b;
+            color: white;
+            padding: 15px 40px; /* 加大按钮的上下和左右填充 */
+            border: none;
+            border-radius: 4px;
+            font-size: 18px; /* 加大按钮字体 */
+            cursor: pointer;
+            width: 50%; /* 增加按钮宽度 */
+        }
+
+        .form-group button:hover {
+            background-color: #005c54;
+        }
+
+        /* 确保 Footer 在页面底部 */
+        footer {
+            background-color: #00796b;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            position: relative; /* 改成 relative */
+            width: 100%;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <nav>
+        <div>
+            <a href="/">Job Listings</a>
+        </div>
+        <div>
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Container for Form -->
+<div class="container">
+    <h2>案件入力</h2>
+    <form action="/submit-job" method="post">
+        <!-- Job Title -->
+        <div class="form-group">
+            <label for="title">案件名称</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+
+        <!-- Job Location -->
+        <div class="form-group">
+            <label for="location">勤務地</label>
+            <input type="text" id="location" name="location" required>
+        </div>
+
+        <!-- Job Location -->
+        <div style="width: 600px">
+            <label for="remoteWork">在宅状況</label>
+            <select id="remoteWork" name="remoteWork">
+                <option value="remoteYes">在宅有り</option>
+                <option value="RemoteNo">在宅なし</option>
+                <option value="uncertainRemote">未定</option>
+            </select>
+        </div>
+
+        <!-- coding languages -->
+        <div style="width: 600px">
+            <label for="codingLanguages">必要なコーデング言語やサービス領域など</label>
+            <select id="codingLanguages" name="codingLanguages">
+                <option value="JAVA">JAVA</option>
+                <option value="PYTHON">PYTHON</option>
+                <option value="NET">.NET</option>
+                <option value="SalesForce">SalesForce</option>
+                <option value="AWS">AWS</option>
+                <option value="otherLanguages">その他</option>
+            </select>
+        </div>
+
+
+        <!-- Job Salary -->
+        <label for="unitPrice">単価</label>
+        <div style="width: 200px; align-items: center; white-space: nowrap;">
+            <input type="text" id="unitPrice" name="unitPrice" required style="flex-grow: 1; margin-right: 5px;"> 万円
+        </div>
+
+        <!-- Job Description -->
+        <div class="form-group">
+            <label for="description">案件詳細</label>
+            <textarea id="description" name="description" rows="5" required></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+            <button type="submit">案件登録</button>
+        </div>
+    </form>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Job Listings. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
